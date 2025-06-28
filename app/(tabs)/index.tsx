@@ -6,7 +6,7 @@ import { router } from 'expo-router';
 import { Button, StyleSheet } from 'react-native';
 
 const quickBuild = () => {
-  router.push('/build-step-2')
+  router.push('/builder/build-step-2')
   return ""
 }
 
@@ -26,7 +26,7 @@ export default function HomeScreen() {
       <ThemedView style={styles.stepContainer}>
           <Button
             title="Build"
-            onPress={() => router.push('/build-step-1')}
+            onPress={() => router.push('/builder/build-step-1')}
           />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
