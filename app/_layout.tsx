@@ -24,8 +24,8 @@ export default function RootLayout() {
       <SQLiteProvider databaseName='fast-npc-db' onInit={dbInit} options={{ useNewConnection: false }}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="builder" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+        <Stack.Screen name="builder" options={{ headerTitle: 'Build an NPC' }} />
+        <Stack.Screen name="+not-found" options={{ headerTitle: 'Oops' }}/>
       </Stack>
       <StatusBar style="auto" />
       </SQLiteProvider>
