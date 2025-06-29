@@ -2,8 +2,9 @@ import { ThemedView } from '@/components/ThemedView';
 import { useRouter } from 'expo-router';
 import { useSQLiteContext } from 'expo-sqlite';
 import { useState } from 'react';
-import { Alert, Button, StyleSheet, TextInput } from 'react-native';
+import { Button, StyleSheet, TextInput } from 'react-native';
 import ClearDatabase from '../db-utils/ClearDatabase';
+import ViewDatabase from '../db-utils/ViewDatabase';
 
 export default function UserForm() {
   const [username, setUsername] = useState('');
@@ -16,18 +17,12 @@ export default function UserForm() {
   const router = useRouter();
 
   const handleViewDatabase = async () => {
-      try {
-        const users = await db.getAllAsync('SELECT * FROM users');
-        console.log('All users:', users);
-        Alert.alert('Database Contents', JSON.stringify(users, null, 2));
-      } catch (error) {
-        console.error('Error viewing database:', error);
-      }
-  }
+    await ViewDatabase(db);
+  };
 
-const handleClearDatabase = async () => {
+  const handleClearDatabase = async () => {
   await ClearDatabase(db);
-};
+  };
 
 const handleSubmit = async () => {
   try {
