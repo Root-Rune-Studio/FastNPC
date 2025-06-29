@@ -1,7 +1,7 @@
 import type { SQLiteDatabase } from "expo-sqlite";
 import { Alert } from "react-native";
 
-const ViewDatabase = async (db: SQLiteDatabase) => {
+const ViewDatabaseUsers = async (db: SQLiteDatabase) => {
     try {
       const users = await db.getAllAsync('SELECT * FROM users');
       console.log('All users:', users);
@@ -12,4 +12,4 @@ const ViewDatabase = async (db: SQLiteDatabase) => {
     }
 };
 
-export default ViewDatabase;
+export default ViewDatabaseUsers;

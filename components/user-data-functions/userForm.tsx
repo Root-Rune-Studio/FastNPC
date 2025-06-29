@@ -3,8 +3,8 @@ import { useRouter } from 'expo-router';
 import { useSQLiteContext } from 'expo-sqlite';
 import { useState } from 'react';
 import { Button, StyleSheet, TextInput } from 'react-native';
-import ClearDatabase from '../db-utils/ClearDatabase';
-import ViewDatabase from '../db-utils/ViewDatabase';
+import ClearDatabaseUsers from '../db-utils/users/ClearDatabaseUsers';
+import ViewDatabaseUsers from '../db-utils/users/ViewDatabaseUsers';
 
 export default function UserForm() {
   const [username, setUsername] = useState('');
@@ -17,11 +17,11 @@ export default function UserForm() {
   const router = useRouter();
 
   const handleViewDatabase = async () => {
-    await ViewDatabase(db);
+    await ViewDatabaseUsers(db);
   };
 
   const handleClearDatabase = async () => {
-  await ClearDatabase(db);
+  await ClearDatabaseUsers(db);
   };
 
 const handleSubmit = async () => {
