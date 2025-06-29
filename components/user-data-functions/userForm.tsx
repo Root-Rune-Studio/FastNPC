@@ -69,9 +69,9 @@ const handleSubmit = async () => {
         value={lastName}
         onChangeText={setLastName}
       />
-      <Button title="Submit" onPress={handleSubmit} />
-      <Button title="View Database" onPress={handleViewDatabase} />
-      <Button title="Clear Database" onPress={handleClearDatabase} />
+      <Button title="Submit a User" onPress={handleSubmit} />
+      <Button title="View Database Users" onPress={handleViewDatabase} />
+      <Button title="Clear Database Users" onPress={handleClearDatabase} />
     </ThemedView>
   );
 }
