@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
   buttonRow: {
     display: 'flex',
     justifyContent: 'center',
-    top: '40',
+    top: 40,
   },
 });
