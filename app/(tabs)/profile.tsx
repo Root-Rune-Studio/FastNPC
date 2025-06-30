@@ -20,7 +20,7 @@ export default function Profile() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Profile</ThemedText>
       </ThemedView>
-      <ThemedText>This is where we're looking to add a Profile.</ThemedText>
+      <ThemedText>This is where we&#39;re looking to add a Profile.</ThemedText>
     </ParallaxScrollView>
   );
 }

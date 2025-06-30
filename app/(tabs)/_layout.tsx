@@ -9,7 +9,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-
+  const auth: boolean = false;
   return (
     <Tabs
       screenOptions={{
@@ -33,18 +33,31 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="builder"
         options={{
-          title: 'Profile',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.fill" color={color} />,
+          title: 'Build',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="plus.app.fill" color={color} />,
         }}
       />
       <Tabs.Screen
+        name="profile"
+        options={
+          auth
+            ? {
+            title: 'Profile',
+            tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.fill" color={color} />,
+          } : { href: null }
+        }
+      />
+      <Tabs.Screen
         name="create-account"
-        options={{
-          title: 'Create Account',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
+        options={
+          !auth
+            ? {
+            title: 'Create Account',
+            tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.fill.badge.plus" color={color} />,
+          } : { href: null }
+        }
       />
     </Tabs>
   );

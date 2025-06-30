@@ -21,7 +21,7 @@ export default function CreateAccount() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Create Your Account</ThemedText>
       </ThemedView>
-      <ThemedText>This is where we're looking to add a Create Account.</ThemedText>
+      <ThemedText>This is where we&#39;re looking to add a Create Account.</ThemedText>
       <ThemedView style={styles.titleContainer}>
         <UserForm />
       </ThemedView>
