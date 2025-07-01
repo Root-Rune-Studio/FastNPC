@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
-
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 
-export default function Profile() {
+export default function BuildStep3() {
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
@@ -18,9 +17,9 @@ export default function Profile() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Profile</ThemedText>
+        <ThemedText type="title">Build Step 3</ThemedText>
       </ThemedView>
-      <ThemedText>This is where we&#39;re looking to add a Profile.</ThemedText>
+      <ThemedText>This is where we&#39;re looking to add Race.</ThemedText>
     </ParallaxScrollView>
   );
 }
