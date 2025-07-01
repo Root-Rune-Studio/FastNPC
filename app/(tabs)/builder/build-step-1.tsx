@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -20,7 +19,7 @@ export default function BuildStep1() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Build Step 1</ThemedText>
       </ThemedView>
-      <ThemedText>This is where we&#39;re looking to add Archetype.</ThemedText>
+      <ThemedText>This is where we&#39;re looking to add Gender, Age, and Potency.</ThemedText>
     </ParallaxScrollView>
   );
 }

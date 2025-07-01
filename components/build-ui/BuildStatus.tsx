@@ -1,31 +1,24 @@
-import { useEffect, useState } from 'react';
-import { useRoute } from '@react-navigation/native';
 import { ThemedView } from '@/components/ThemedView';
 import { router } from 'expo-router';
 import { Button, StyleSheet } from 'react-native';
 
-export default function BuildStatus() {
-  const route = useRoute();
-  const [currrentRoute, setCurrentRoute] = useState<string>(route.name);
-  useEffect(() => {
-    setCurrentRoute(route.name);
-  }, [route.name])
+export default function BuildStatus( { routeName } : { routeName: string } ) {
   return (
     <ThemedView style={styles.buttonRow}>
       <Button
         title="Step 1"
-        onPress={() => router.push('/builder/build-step-1')}
-        color={ currrentRoute.includes('step-1') ? 'red' : '' }
+        onPress={() => router.push('/(tabs)/builder/build-step-1')}
+        color={ routeName.includes('step-1') ? 'red' : undefined }
       />
       <Button
         title="Step 2"
-        onPress={() => router.push('/builder/build-step-2')}
-        color={ currrentRoute.includes('step-2') ? 'red' : '' }
+        onPress={() => router.push('/(tabs)/builder/build-step-2')}
+        color={ routeName.includes('step-2') ? 'red' : undefined }
       />
       <Button
         title="Step 3"
-        onPress={() => router.push('/builder/build-step-3')}
-        color={ currrentRoute.includes('step-3') ? 'red' : '' }
+        onPress={() => router.push('/(tabs)/builder/build-step-3')}
+        color={ routeName.includes('step-3') ? 'red' : undefined }
       />
     </ThemedView>
   );
@@ -35,7 +28,9 @@ export default function BuildStatus() {
 const styles = StyleSheet.create({
   buttonRow: {
     display: 'flex',
+    flex: 0,
+    flexDirection: 'row',
     justifyContent: 'center',
-    top: 40,
+    gap: 10,
   },
 });

@@ -1,32 +1,14 @@
-import React from 'react';
-import { Stack } from 'expo-router';
+import { Slot, useSegments } from 'expo-router';
 import { ThemedView } from '@/components/ThemedView';
 import BuildStatus from '@/components/build-ui/BuildStatus';
 
 export default function BuildLayout() {
+  const segments = useSegments();
+  const routeName = segments[segments.length - 1] || '';
   return (
-    <ThemedView>
-      <BuildStatus />
-      <Stack>
-        <Stack.Screen
-          name="build-step-1"
-          options={{
-            title: 'Step 1',
-          }}
-        />
-        <Stack.Screen
-          name="build-step-2"
-          options={{
-            title: 'Step 2',   
-          }}
-        />
-        <Stack.Screen
-          name="build-step-3"
-          options={{
-            title: 'Step 3',   
-          }}
-        />
-      </Stack>
+    <ThemedView style={{ flex: 1, top: 25 }}>
+      <BuildStatus routeName={routeName} />
+      <Slot />
     </ThemedView>
   );
 }

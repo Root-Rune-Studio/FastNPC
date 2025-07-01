@@ -9,6 +9,9 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  // chage the value of auth to tru to simulate being logged-in
+  // the third tab button cinditionally renders to either be for
+  // 'profile' or 'create account'
   const auth: boolean = false;
   return (
     <Tabs
