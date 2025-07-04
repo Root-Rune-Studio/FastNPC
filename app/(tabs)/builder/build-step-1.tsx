@@ -1,39 +1,57 @@
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { Age, Gender, Potency } from '@/types/db-schema';
 import { useState } from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
-type Gender = 'M' | 'N/A' | 'F' | null;
-type Age = 'Child' | 'Adult' | 'Elder' | null;
-type Potency = 'Very Weak' | 'Weak' | 'Neutral' | 'Strong' | 'Very Strong' | null;
+// Mock data that would typically come from your database
+const GENDERS: Gender[] = [
+  { id: 1, name: 'M' },
+  { id: 2, name: 'N/A' },
+  { id: 3, name: 'F' }
+];
+
+const AGES: Age[] = [
+  { id: 1, name: 'Child' },
+  { id: 2, name: 'Adult' },
+  { id: 3, name: 'Elder' }
+];
+
+const POTENCIES: Potency[] = [
+  { id: 1, name: 'Very Weak', modifier: -2 },
+  { id: 2, name: 'Weak', modifier: -1 },
+  { id: 3, name: 'Neutral', modifier: 0 },
+  { id: 4, name: 'Strong', modifier: 1 },
+  { id: 5, name: 'Very Strong', modifier: 2 }
+];
 
 export default function BuildStep1() {
-  const [selectedGender, setSelectedGender] = useState<Gender>('N/A');
-  const [selectedAge, setSelectedAge] = useState<Age>('Adult');
-  const [selectedPotency, setSelectedPotency] = useState<Potency>('Neutral');
+  const [selectedGenderId, setSelectedGenderId] = useState<number>(2);
+  const [selectedAgeId, setSelectedAgeId] = useState<number>(2);
+  const [selectedPotencyId, setSelectedPotencyId] = useState<number>(3);
 
-  const renderSelectionButtons = (
-    options: string[],
-    selectedValue: string | null,
-    onSelect: (value: any) => void,
+  const renderSelectionButtons = <T extends { id: number; name: string }>(
+    options: T[],
+    selectedId: number,
+    onSelect: (id: number) => void,
     horizontal: boolean = true
   ) => (
     <ThemedView style={horizontal ? styles.horizontalContainer : styles.verticalContainer}>
       {options.map((option) => (
         <TouchableOpacity
-          key={option}
+          key={option.id}
           style={[
             styles.selectionButton,
-            selectedValue === option && styles.selectedButton,
+            selectedId === option.id && styles.selectedButton,
             !horizontal && styles.fullWidthButton
           ]}
-          onPress={() => onSelect(option)}
+          onPress={() => onSelect(option.id)}
         >
           <ThemedText style={[
             styles.buttonText,
-            selectedValue === option && styles.selectedButtonText
+            selectedId === option.id && styles.selectedButtonText
           ]}>
-            {option}
+            {option.name}
           </ThemedText>
         </TouchableOpacity>
       ))}
@@ -44,25 +62,20 @@ export default function BuildStep1() {
     <ScrollView style={styles.container}>      
       {/* Gender Section */}
       <ThemedView style={styles.sectionContainer}>
-        <ThemedText type="subtitle">Gender</ThemedText>
-        {renderSelectionButtons(['M', 'N/A', 'F'], selectedGender, setSelectedGender)}
+        <ThemedText style={styles.sectionText} type="subtitle">Gender</ThemedText>
+        {renderSelectionButtons(GENDERS, selectedGenderId, setSelectedGenderId)}
       </ThemedView>
 
       {/* Age Section */}
       <ThemedView style={styles.sectionContainer}>
-        <ThemedText type="subtitle">Age</ThemedText>
-        {renderSelectionButtons(['Child', 'Adult', 'Elder'], selectedAge, setSelectedAge)}
+        <ThemedText style={styles.sectionText} type="subtitle">Age</ThemedText>
+        {renderSelectionButtons(AGES, selectedAgeId, setSelectedAgeId)}
       </ThemedView>
 
       {/* Potency Section */}
       <ThemedView style={styles.sectionContainer}>
-        <ThemedText type="subtitle">Potency</ThemedText>
-        {renderSelectionButtons(
-          ['Very Weak', 'Weak', 'Neutral', 'Strong', 'Very Strong'], 
-          selectedPotency, 
-          setSelectedPotency,
-          false
-        )}
+        <ThemedText style={styles.sectionText} type="subtitle">Potency</ThemedText>
+        {renderSelectionButtons(POTENCIES, selectedPotencyId, setSelectedPotencyId, false)}
       </ThemedView>
     </ScrollView>
   );
@@ -112,4 +125,7 @@ const styles = StyleSheet.create({
   selectedButtonText: {
     color: 'white',
   },
+  sectionText: {
+    textAlign: 'center'
+  }
 });
