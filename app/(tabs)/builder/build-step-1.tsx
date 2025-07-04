@@ -4,10 +4,11 @@ import { getAges, getGenders, getPotencies } from '@/services/build-step-1-servi
 import { Age, Gender, Potency } from '@/types/db-schema';
 import { useSQLiteContext } from 'expo-sqlite';
 import { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+
+// FIXME: state resets on page change. Will need global context
 
 export default function BuildStep1() {
-  // State for data arrays fetched from database
   const db = useSQLiteContext();
   const [genders, setGenders] = useState<Gender[]>([]);
   const [ages, setAges] = useState<Age[]>([]);
@@ -79,6 +80,15 @@ export default function BuildStep1() {
     </ThemedView>
   );
 
+  if (isLoading) {
+    return (
+      <ThemedView style={styles.loadingContainer}>
+         <ActivityIndicator size="large" color="#007AFF" />
+        <ThemedText style={styles.loadingText}>Loading options...</ThemedText>
+      </ThemedView>
+    );
+  }
+
   return (
     <ScrollView style={styles.container}>      
       {/* Gender Section */}
@@ -106,6 +116,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  loadingText: {
+    fontSize: 18,
+    textAlign: 'center',
   },
   titleContainer: {
     flexDirection: 'row',
