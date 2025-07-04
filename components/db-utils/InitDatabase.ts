@@ -1,3 +1,5 @@
+import seedInitialData from "./seedInitialData";
+
 const dbInit = async (db: any) => {
   // Enable WAL mode for better performance
   await db.execAsync(`PRAGMA journal_mode = WAL;`);
@@ -33,6 +35,13 @@ const dbInit = async (db: any) => {
       description TEXT NOT NULL
     );
   `);
+
+  await db.execAsync(`
+    CREATE TABLE IF NOT EXISTS genders (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT
+    )
+  `)
 
   await db.execAsync(`
     CREATE TABLE IF NOT EXISTS potencies (
@@ -79,7 +88,29 @@ const dbInit = async (db: any) => {
     );
   `);
 
+  // Table to track if initial data has been seeded
+  await db.execAsync(`
+    CREATE TABLE IF NOT EXISTS db_metadata (
+      key TEXT PRIMARY KEY,
+      value TEXT
+    );
+  `);
+
   await db.execAsync(`PRAGMA foreign_keys = ON;`);
+
+  // Check if initial data has been seeded
+  const seedCheck = await db.getFirstAsync(`
+    SELECT value FROM db_metadata WHERE key = 'initial_seed_complete'
+  `);
+
+  if (!seedCheck) {
+    await seedInitialData(db);
+    
+    // Mark that initial seeding is complete
+    await db.runAsync(`
+      INSERT INTO db_metadata (key, value) VALUES ('initial_seed_complete', 'true')
+    `);
+  }
 }
 
 export default dbInit
