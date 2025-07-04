@@ -1,34 +1,44 @@
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { Age, Gender, Potency } from '@/types/db-schema';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
-// Mock data that would typically come from your database
-const GENDERS: Gender[] = [
-  { id: 1, name: 'M' },
-  { id: 2, name: 'N/A' },
-  { id: 3, name: 'F' }
-];
-
-const AGES: Age[] = [
-  { id: 1, name: 'Child' },
-  { id: 2, name: 'Adult' },
-  { id: 3, name: 'Elder' }
-];
-
-const POTENCIES: Potency[] = [
-  { id: 1, name: 'Very Weak', modifier: -2 },
-  { id: 2, name: 'Weak', modifier: -1 },
-  { id: 3, name: 'Neutral', modifier: 0 },
-  { id: 4, name: 'Strong', modifier: 1 },
-  { id: 5, name: 'Very Strong', modifier: 2 }
-];
+// TODO: Add useEffect services to collect & set the various state options
 
 export default function BuildStep1() {
   const [selectedGenderId, setSelectedGenderId] = useState<number>(2);
   const [selectedAgeId, setSelectedAgeId] = useState<number>(2);
   const [selectedPotencyId, setSelectedPotencyId] = useState<number>(3);
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+
+  useEffect(() => {
+        if (isLoading) {
+          // TODO:
+            // Add loading spinners from a component here
+        }
+    
+        getGenders().then(response => {
+          if (response.data) {  
+            setSelectedGenderId(response.data) 
+            setIsLoading(false)
+          }
+        })
+
+        getAges().then(response => {
+          if (response.data) {  
+            setSelectedAgeId(response.data) 
+            setIsLoading(false)
+          }
+        })
+
+        getPotency().then(response => {
+          if (response.data) {  
+            setSelectedPotencyId(response.data) 
+            setIsLoading(false)
+          }
+        })
+
+      }, [])
 
   const renderSelectionButtons = <T extends { id: number; name: string }>(
     options: T[],
