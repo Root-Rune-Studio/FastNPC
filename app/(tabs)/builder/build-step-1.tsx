@@ -1,44 +1,55 @@
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { getAges, getGenders, getPotencies } from '@/services/build-step-1-services';
+import { Age, Gender, Potency } from '@/types/db-schema';
+import { useSQLiteContext } from 'expo-sqlite';
 import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
-// TODO: Add useEffect services to collect & set the various state options
-
 export default function BuildStep1() {
+  // State for data arrays fetched from database
+  const db = useSQLiteContext();
+  const [genders, setGenders] = useState<Gender[]>([]);
+  const [ages, setAges] = useState<Age[]>([]);
+  const [potencies, setPotencies] = useState<Potency[]>([]);
+
   const [selectedGenderId, setSelectedGenderId] = useState<number>(2);
   const [selectedAgeId, setSelectedAgeId] = useState<number>(2);
   const [selectedPotencyId, setSelectedPotencyId] = useState<number>(3);
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  
+  
   useEffect(() => {
-        if (isLoading) {
-          // TODO:
-            // Add loading spinners from a component here
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        
+        const [gendersResponse, agesResponse, potenciesResponse] = await Promise.all([
+          getGenders(db),
+          getAges(db),
+          getPotencies(db)
+        ]);
+
+        if (gendersResponse.data) {
+          setGenders(gendersResponse.data);
         }
-    
-        getGenders().then(response => {
-          if (response.data) {  
-            setSelectedGenderId(response.data) 
-            setIsLoading(false)
-          }
-        })
+        
+        if (agesResponse.data) {
+          setAges(agesResponse.data);
+        }
+        
+        if (potenciesResponse.data) {
+          setPotencies(potenciesResponse.data);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-        getAges().then(response => {
-          if (response.data) {  
-            setSelectedAgeId(response.data) 
-            setIsLoading(false)
-          }
-        })
-
-        getPotency().then(response => {
-          if (response.data) {  
-            setSelectedPotencyId(response.data) 
-            setIsLoading(false)
-          }
-        })
-
-      }, [])
+    fetchData();
+  }, [db]);
 
   const renderSelectionButtons = <T extends { id: number; name: string }>(
     options: T[],
@@ -73,19 +84,19 @@ export default function BuildStep1() {
       {/* Gender Section */}
       <ThemedView style={styles.sectionContainer}>
         <ThemedText style={styles.sectionText} type="subtitle">Gender</ThemedText>
-        {renderSelectionButtons(GENDERS, selectedGenderId, setSelectedGenderId)}
+        {renderSelectionButtons(genders, selectedGenderId, setSelectedGenderId)}
       </ThemedView>
 
       {/* Age Section */}
       <ThemedView style={styles.sectionContainer}>
         <ThemedText style={styles.sectionText} type="subtitle">Age</ThemedText>
-        {renderSelectionButtons(AGES, selectedAgeId, setSelectedAgeId)}
+        {renderSelectionButtons(ages, selectedAgeId, setSelectedAgeId)}
       </ThemedView>
 
       {/* Potency Section */}
       <ThemedView style={styles.sectionContainer}>
         <ThemedText style={styles.sectionText} type="subtitle">Potency</ThemedText>
-        {renderSelectionButtons(POTENCIES, selectedPotencyId, setSelectedPotencyId, false)}
+        {renderSelectionButtons(potencies, selectedPotencyId, setSelectedPotencyId, false)}
       </ThemedView>
     </ScrollView>
   );
