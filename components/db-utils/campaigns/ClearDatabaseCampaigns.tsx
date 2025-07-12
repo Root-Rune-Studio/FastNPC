@@ -1,9 +1,9 @@
 import type { SQLiteDatabase } from "expo-sqlite";
 import { Alert } from "react-native";
 
-const ClearDatabaseUsers = async (db: SQLiteDatabase) => {
+const ClearDatabaseCampaigns = async (db: SQLiteDatabase) => {
     try {
-      await db.runAsync('DELETE FROM users');
+      await db.runAsync('DELETE FROM campaigns');
       Alert.alert('Success', 'Database cleared');
     } catch (error) {
       console.error('Error clearing database:', error);
@@ -11,4 +11,4 @@ const ClearDatabaseUsers = async (db: SQLiteDatabase) => {
     }
 };
 
-export default ClearDatabaseUsers;
+export default ClearDatabaseCampaigns;

@@ -4,7 +4,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
-import UserForm from '@/components/user-data-functions/userForm';
+import CampaignForm from '@/components/user-data-functions/campaignForm';
 
 export default function CreateAccount() {
   return (
@@ -19,11 +19,11 @@ export default function CreateAccount() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Create Your Account</ThemedText>
+        <ThemedText type="title">Create Campaign</ThemedText>
       </ThemedView>
-      <ThemedText>This is where we&#39;re looking to add a Create Account.</ThemedText>
+      <ThemedText>What's your campaign called?</ThemedText>
       <ThemedView style={styles.titleContainer}>
-        <UserForm />
+        <CampaignForm />
       </ThemedView>
     </ParallaxScrollView>
   );

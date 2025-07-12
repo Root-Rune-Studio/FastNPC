@@ -1,10 +1,6 @@
-export interface User {
+export interface Campaign {
   id: number;
-  username: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  password: string;
+  title: string;
 }
 
 export interface NPC {
