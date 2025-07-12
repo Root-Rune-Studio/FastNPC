@@ -5,13 +5,9 @@ const dbInit = async (db: any) => {
   await db.execAsync(`PRAGMA journal_mode = WAL;`);
   
   await db.execAsync(`
-    CREATE TABLE IF NOT EXISTS users (
+    CREATE TABLE IF NOT EXISTS campaigns (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      username TEXT UNIQUE NOT NULL,
-      email TEXT UNIQUE NOT NULL,
-      first_name TEXT,
-      last_name TEXT,
-      password TEXT NOT NULL
+      title TEXT UNIQUE NOT NULL
     );
   `);
 
@@ -77,12 +73,12 @@ const dbInit = async (db: any) => {
       caster BOOLEAN,
       potency_id INTEGER,
       archetype_id INTEGER,
-      user_id INTEGER,
+      campaign_id INTEGER,
       bond_id INTEGER,
       flaw_id INTEGER,
       FOREIGN KEY (potency_id) REFERENCES potencies(id),
       FOREIGN KEY (archetype_id) REFERENCES archetypes(id),
-      FOREIGN KEY (user_id) REFERENCES users(id),
+      FOREIGN KEY (campaign_id) REFERENCES campaigns(id),
       FOREIGN KEY (bond_id) REFERENCES bonds(id),
       FOREIGN KEY (flaw_id) REFERENCES flaws(id)
     );
