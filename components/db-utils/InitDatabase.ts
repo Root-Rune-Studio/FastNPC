@@ -34,10 +34,10 @@ const dbInit = async (db: any) => {
 
   await db.execAsync(`
     CREATE TABLE IF NOT EXISTS genders (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT
-    )
-  `)
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT
+    );
+  `);
 
   await db.execAsync(`
     CREATE TABLE IF NOT EXISTS potencies (
@@ -57,7 +57,15 @@ const dbInit = async (db: any) => {
       constitution INTEGER,
       intelligence INTEGER,
       wisdom INTEGER,
-      charisma INTEGER
+      charisma INTEGER,
+      primary_ability TEXT
+    );
+  `);
+
+  await db.execAsync(`
+    CREATE TABLE IF NOT EXISTS species (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT
     );
   `);
 
@@ -65,20 +73,24 @@ const dbInit = async (db: any) => {
     CREATE TABLE IF NOT EXISTS npcs (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
-      race TEXT NOT NULL,
-      age INTEGER,
       hp INTEGER,
       ac INTEGER,
       speed INTEGER,
       caster BOOLEAN,
+      campaign_id INTEGER,
+      gender_id INTEGER,
+      age_id INTEGER,
       potency_id INTEGER,
       archetype_id INTEGER,
-      campaign_id INTEGER,
+      species_id INTEGER,
       bond_id INTEGER,
       flaw_id INTEGER,
+      FOREIGN KEY (campaign_id) REFERENCES campaigns(id),
+      FOREIGN KEY (gender_id) REFERENCES genders(id),
+      FOREIGN KEY (age_id) REFERENCES ages(id),
       FOREIGN KEY (potency_id) REFERENCES potencies(id),
       FOREIGN KEY (archetype_id) REFERENCES archetypes(id),
-      FOREIGN KEY (campaign_id) REFERENCES campaigns(id),
+      FOREIGN KEY (species_id) REFERENCES species(id),
       FOREIGN KEY (bond_id) REFERENCES bonds(id),
       FOREIGN KEY (flaw_id) REFERENCES flaws(id)
     );

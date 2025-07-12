@@ -38,29 +38,16 @@ export default function TabLayout() {
       <Tabs.Screen
         name="builder"
         options={{
-          title: 'Build',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="plus.app.fill" color={color} />,
+          title: 'NPCs',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.fill" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="profile"
-        options={
-          auth
-            ? {
-            title: 'Profile',
-            tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.fill" color={color} />,
-          } : { href: null }
-        }
-      />
-      <Tabs.Screen
-        name="create-account"
-        options={
-          !auth
-            ? {
-            title: 'Create Account',
-            tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.fill.badge.plus" color={color} />,
-          } : { href: null }
-        }
+        name="create-campaign"
+        options={{
+          title: 'Campaigns',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="plus.app.fill" color={color} />,
+        }}
       />
     </Tabs>
   );
