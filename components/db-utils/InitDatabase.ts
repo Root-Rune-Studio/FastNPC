@@ -121,4 +121,4 @@ const dbInit = async (db: any) => {
   }
 }
 
-export default dbInit
+export default dbInit;

@@ -16,6 +16,7 @@ const seedInitialData = async (db: any) => {
   await db.runAsync(`INSERT INTO potencies (name, modifier) VALUES ('Strong', 1)`);
   await db.runAsync(`INSERT INTO potencies (name, modifier) VALUES ('Very Strong', 2)`);
 
+  // seed archetypes
   await db.runAsync(
     `INSERT INTO archetypes (
       name,
@@ -81,6 +82,14 @@ const seedInitialData = async (db: any) => {
       'INT'
     )`
   );
+
+  // seed species
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Human')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Elf')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Dwarf')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Kenku')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Halfling')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Harengon')`);
 }
 
 export default seedInitialData
