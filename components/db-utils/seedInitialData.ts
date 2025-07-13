@@ -17,73 +17,68 @@ const seedInitialData = async (db: any) => {
   await db.runAsync(`INSERT INTO potencies (name, modifier) VALUES ('Very Strong', 2)`);
 
   await db.runAsync(
-    `INSERT INTO archetypes 
-      (
-        name,
-        description,
-        strength, dexterity, constitution, intelligence, wisdom, charisma,
-        primary_ability
-      ) VALUES (
-        'Commoner',
-        'Common',
-        10, 10, 12, 10, 10, 10,
-        'CON'
-      )`
+    `INSERT INTO archetypes (
+      name,
+      description,
+      strength, dexterity, constitution, intelligence, wisdom, charisma,
+      primary_ability
+    ) VALUES (
+      'Commoner',
+      'Common',
+      10, 10, 12, 10, 10, 10,
+      'CON'
+    )`
   );
   await db.runAsync(
-    `INSERT INTO archetypes 
-      (
-        name,
-        description,
-        strength, dexterity, constitution, intelligence, wisdom, charisma,
-        primary_ability
-      ) VALUES (
-        'Thief',
-        'Roguish',
-        8, 14, 10, 12, 8, 10,
-        'DEX'
-      )`
+    `INSERT INTO archetypes (
+      name,
+      description,
+      strength, dexterity, constitution, intelligence, wisdom, charisma,
+      primary_ability
+    ) VALUES (
+      'Thief',
+      'Roguish',
+      8, 14, 10, 12, 8, 10,
+      'DEX'
+    )`
   );
   await db.runAsync(
-    `INSERT INTO archetypes 
-      (
-        name,
-        description,
-        strength, dexterity, constitution, intelligence, wisdom, charisma,
-        primary_ability
-      ) VALUES (
-        'Hermit',
-        'Loner',
-        8, 10, 12, 12, 14, 8,
-        'WIS'
-      )`
+    `INSERT INTO archetypes (
+      name,
+      description,
+      strength, dexterity, constitution, intelligence, wisdom, charisma,
+      primary_ability
+    ) VALUES (
+      'Hermit',
+      'Loner',
+      8, 10, 12, 12, 14, 8,
+      'WIS'
+    )`
   );
   await db.runAsync(
-    `INSERT INTO archetypes 
-      (
-        name,
-        description,
-        strength, dexterity, constitution, intelligence, wisdom, charisma,
-        primary_ability
-      ) VALUES (
-        'Priest',
-        'Holy',
-        8, 8, 12, 10, 12, 14,
-        'CHA'
-      )`
+    `INSERT INTO archetypes (
+      name,
+      description,
+      strength, dexterity, constitution, intelligence, wisdom, charisma,
+      primary_ability
+    ) VALUES (
+      'Priest',
+      'Holy',
+      8, 8, 12, 10, 12, 14,
+      'CHA'
+    )`
   );
   await db.runAsync(
-    `INSERT INTO archetypes 
-      (
-        name,
-        description,
-        strength, dexterity, constitution, intelligence, wisdom, charisma,
-        primary_ability
-      ) VALUES (
-        'Noble',
-        'Annoying',
-        10, 8, 12, 14, 10, 12,
-        'INT'
+    `INSERT INTO archetypes (
+      name,
+      description,
+      strength, dexterity, constitution, intelligence, wisdom, charisma,
+      primary_ability
+    ) VALUES (
+      'Noble',
+      'Annoying',
+      10, 8, 12, 14, 10, 12,
+      'INT'
     )`
   );
 }
