@@ -19,9 +19,9 @@ export default function BuildStep1() {
   const [ages, setAges] = useState<Age[]>([]);
   const [potencies, setPotencies] = useState<Potency[]>([]);
 
-  const [selectedGenderId, setSelectedGenderId] = useState<number>(2);
-  const [selectedAgeId, setSelectedAgeId] = useState<number>(2);
-  const [selectedPotencyId, setSelectedPotencyId] = useState<number>(3);
+  const [selectedGenderId, setSelectedGenderId] = useState<number>(currentNPC?.gender_id || 2);
+  const [selectedAgeId, setSelectedAgeId] = useState<number>(currentNPC?.age_id || 2);
+  const [selectedPotencyId, setSelectedPotencyId] = useState<number>(currentNPC?.potency_id || 3);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   
   
