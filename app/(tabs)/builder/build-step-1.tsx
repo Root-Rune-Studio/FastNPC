@@ -1,13 +1,14 @@
 import LoadingScreen from '@/components/LoadingScreen';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { getAges, getGenders, getPotencies } from '@/services/build-step-1-services';
+import { getAges, getGenders, getPotencies } from '@/services/build-step-1';
 import { Age, Gender, Potency } from '@/types/db-schema';
 import { useSQLiteContext } from 'expo-sqlite';
 import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 // FIXME: state resets on page change. Will need global context
+// TODO: Abstract most of this logic to a component and just house the route here
 
 export default function BuildStep1() {
   const db = useSQLiteContext();
