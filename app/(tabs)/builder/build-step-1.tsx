@@ -1,3 +1,4 @@
+import { useCurrentNPC } from '@/app/context/current-npc';
 import LoadingScreen from '@/components/LoadingScreen';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
@@ -12,6 +13,8 @@ import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default function BuildStep1() {
   const db = useSQLiteContext();
+  const { currentNPC, updateCurrentNPC } = useCurrentNPC();
+
   const [genders, setGenders] = useState<Gender[]>([]);
   const [ages, setAges] = useState<Age[]>([]);
   const [potencies, setPotencies] = useState<Potency[]>([]);
@@ -54,6 +57,21 @@ export default function BuildStep1() {
     fetchData();
   }, [db]);
 
+    const handleGenderSelect = async (genderId: number) => {
+    setSelectedGenderId(genderId);
+    await updateCurrentNPC({ gender_id: genderId });
+  };
+
+  const handleAgeSelect = async (ageId: number) => {
+    setSelectedAgeId(ageId);
+    await updateCurrentNPC({ age_id: ageId });
+  };
+
+  const handlePotencySelect = async (potencyId: number) => {
+    setSelectedPotencyId(potencyId);
+    await updateCurrentNPC({ potency_id: potencyId });
+  };
+
   const renderSelectionButtons = <T extends { id: number; name: string }>(
     options: T[],
     selectedId: number,
@@ -93,19 +111,19 @@ export default function BuildStep1() {
       {/* Gender Section */}
       <ThemedView style={styles.sectionContainer}>
         <ThemedText style={styles.sectionText} type="subtitle">Gender</ThemedText>
-        {renderSelectionButtons(genders, selectedGenderId, setSelectedGenderId)}
+        {renderSelectionButtons(genders, selectedGenderId, handleGenderSelect)}
       </ThemedView>
 
       {/* Age Section */}
       <ThemedView style={styles.sectionContainer}>
         <ThemedText style={styles.sectionText} type="subtitle">Age</ThemedText>
-        {renderSelectionButtons(ages, selectedAgeId, setSelectedAgeId)}
+        {renderSelectionButtons(ages, selectedAgeId, handleAgeSelect)}
       </ThemedView>
 
       {/* Potency Section */}
       <ThemedView style={styles.sectionContainer}>
         <ThemedText style={styles.sectionText} type="subtitle">Potency</ThemedText>
-        {renderSelectionButtons(potencies, selectedPotencyId, setSelectedPotencyId, false)}
+        {renderSelectionButtons(potencies, selectedPotencyId, handlePotencySelect, false)}
       </ThemedView>
     </ScrollView>
   );
