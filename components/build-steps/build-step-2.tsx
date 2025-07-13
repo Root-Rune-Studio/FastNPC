@@ -26,7 +26,18 @@ export default function BuildStep2() {
   });
 
 const renderSelectionButtons = (
-    options: { id: number; name: string }[],
+    options: {
+      id: number;
+      name: string,
+      primary_ability: string,
+      strength: number,
+      dexterity: number,
+      constitution: number,
+      wisdom: number,
+      intelligence: number,
+      charisma: number,
+      description: string,
+    }[],
     selectedId: number,
     onSelect: (id: number) => Promise<void>,
     horizontal: boolean = true
@@ -46,8 +57,38 @@ const renderSelectionButtons = (
             styles.buttonText,
             selectedId === option.id && styles.selectedButtonText
           ]}>
-            {option.name}
+              {option.name}
           </ThemedText>
+          <ThemedText style={[
+            styles.abilityText,
+            selectedId === option.id && styles.selectedButtonText
+          ]}>
+              {option.primary_ability}
+          </ThemedText>
+          {selectedId === option.id
+            ? (
+              <ThemedView style={styles.descriptionContainer}>
+                <ThemedText style={[
+                  styles.abilityText,
+                  selectedId === option.id && styles.selectedButtonText
+                ]}>
+                  {option.strength}&nbsp;&nbsp;
+                  {option.dexterity}&nbsp;&nbsp;
+                  {option.constitution}&nbsp;&nbsp;
+                  {option.wisdom}&nbsp;&nbsp;
+                  {option.intelligence}&nbsp;&nbsp;
+                  {option.charisma}
+                </ThemedText>
+                <ThemedText style={[
+                  styles.abilityText,
+                  selectedId === option.id && styles.selectedButtonText,
+                  { textAlign: 'center' }
+                ]}>
+                  {option.description}
+                </ThemedText>
+              </ThemedView>
+            ) : null
+          }
         </TouchableOpacity>
       ))}
     </ThemedView>
@@ -59,7 +100,6 @@ const renderSelectionButtons = (
 
   return (
     <ScrollView style={styles.container}>      
-      {/* Archetype Section */}
       <ThemedView style={styles.sectionContainer}>
         <ThemedText style={styles.sectionText} type="subtitle">Archetype</ThemedText>
         {renderSelectionButtons(dataArrays[0] || [], selections[0], createSelectionHandler(0), false)}
@@ -87,6 +127,11 @@ const styles = StyleSheet.create({
   verticalContainer: {
     marginTop: 10,
   },
+  descriptionContainer : {
+    marginTop: 16,
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+  },
   selectionButton: {
     backgroundColor: '#D3D3D3',
     paddingVertical: 12,
@@ -106,6 +151,10 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: '500',
+  },
+  abilityText: {
+    fontSize: 14,
+    fontWeight: 400,
   },
   selectedButtonText: {
     color: 'white',
