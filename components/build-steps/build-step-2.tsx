@@ -6,6 +6,7 @@ import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import LoadingScreen from "../LoadingScreen";
 import { ThemedText } from "../ThemedText";
 import { ThemedView } from "../ThemedView";
+import StandardArray from "../build-ui/StandardArray";
 
 export default function BuildStep2() {
   const db = useSQLiteContext();
@@ -68,17 +69,21 @@ const renderSelectionButtons = (
           {selectedId === option.id
             ? (
               <ThemedView style={styles.descriptionContainer}>
-                <ThemedText style={[
-                  styles.abilityText,
-                  selectedId === option.id && styles.selectedButtonText
-                ]}>
-                  {option.strength}&nbsp;&nbsp;
-                  {option.dexterity}&nbsp;&nbsp;
-                  {option.constitution}&nbsp;&nbsp;
-                  {option.wisdom}&nbsp;&nbsp;
-                  {option.intelligence}&nbsp;&nbsp;
-                  {option.charisma}
-                </ThemedText>
+                <StandardArray
+                  style={[
+                    styles.abilityText,
+                    selectedId === option.id && styles.selectedButtonText
+                  ]}
+                  str={option.strength}
+                  dex={option.dexterity}
+                  con={option.constitution}
+                  wis={option.wisdom}
+                  int={option.intelligence}
+                  cha={option.charisma}
+                  // Need to pass modifier from potency
+                  // right now only potency_id is passed
+                  mod={0}
+                />
                 <ThemedText style={[
                   styles.abilityText,
                   selectedId === option.id && styles.selectedButtonText,
