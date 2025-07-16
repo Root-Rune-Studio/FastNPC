@@ -1,6 +1,6 @@
 import { Archetype } from "@/types/db-schema";
 
-const getArchetypes = async (db: any): Promise<{ data: Archetype[] | null, error?: string }> => {
+export const getArchetypes = async (db: any): Promise<{ data: Archetype[] | null, error?: string }> => {
   try {
     const result = await db.getAllAsync(`SELECT * FROM archetypes ORDER BY id`);
     return { data: result as Archetype[] };
@@ -10,4 +10,12 @@ const getArchetypes = async (db: any): Promise<{ data: Archetype[] | null, error
   }
 };
 
-export default getArchetypes;
+export const getPotencyModifier = async (db: any, id: number): Promise<{ modifier: number | null, error?: string }> => {
+  try {
+    const result = await db.getFirstAsync(`SELECT modifier FROM potencies WHERE id = ${id}`);
+    return result;
+  } catch (error) {
+    console.error('Error fetching potency modifier:', error);
+    return { modifier: 0 };
+  }
+}

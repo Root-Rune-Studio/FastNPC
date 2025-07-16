@@ -1,6 +1,7 @@
-import React from "react";
+import * as React from "react";
 import { ThemedText } from "../ThemedText";
 import { StyleProp, Text, TextStyle } from "react-native";
+import { getPotencyModifier } from "@/services/build-step-2";
 
 type AbilityScores = {
   str: number;
@@ -11,7 +12,8 @@ type AbilityScores = {
   cha: number;
 }
 type AbilityModifier = {
-  mod: number;
+  db: any;
+  id: number;
 };
 
 export default function StandardArray({
@@ -21,9 +23,18 @@ export default function StandardArray({
   wis,
   int,
   cha,
-  mod,
+  db,
+  id,
   style
 }: AbilityScores & AbilityModifier & { style?: StyleProp<TextStyle> }) {
+  const [modifier, setModifier] = React.useState<number>(0);
+  
+    React.useEffect(() => {
+      getPotencyModifier(db, id).then((potency) => {
+        setModifier(potency.modifier as number);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
   return (
     <ThemedText style={[
       style,
@@ -34,12 +45,12 @@ export default function StandardArray({
         width: '100%'
       }
     ]}>
-      <Text>{str + mod}  |  </Text> 
-      <Text>{dex + mod}  |  </Text>
-      <Text>{con + mod}  |  </Text> 
-      <Text>{wis + mod}  |  </Text> 
-      <Text>{int + mod}  |  </Text> 
-      <Text>{cha + mod}</Text>
+      <Text>{str + modifier}  |  </Text> 
+      <Text>{dex + modifier}  |  </Text>
+      <Text>{con + modifier}  |  </Text> 
+      <Text>{wis + modifier}  |  </Text> 
+      <Text>{int + modifier}  |  </Text> 
+      <Text>{cha + modifier}</Text>
     </ThemedText>
   )
 }

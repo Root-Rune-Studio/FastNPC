@@ -1,6 +1,6 @@
 import { useCurrentNPC } from "@/app/context/current-npc";
 import { useNPCBuilder } from "@/hooks/useNPCBuilder";
-import getArchetypes from "@/services/build-step-2";
+import { getArchetypes } from "@/services/build-step-2";
 import { useSQLiteContext } from 'expo-sqlite';
 import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import LoadingScreen from "../LoadingScreen";
@@ -82,7 +82,8 @@ const renderSelectionButtons = (
                   cha={option.charisma}
                   // Need to pass modifier from potency
                   // right now only potency_id is passed
-                  mod={0}
+                  db={db}
+                  id={currentNPC?.potency_id as number}
                 />
                 <ThemedText style={[
                   styles.abilityText,
