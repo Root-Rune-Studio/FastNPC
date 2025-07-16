@@ -80,8 +80,6 @@ const renderSelectionButtons = (
                   wis={option.wisdom}
                   int={option.intelligence}
                   cha={option.charisma}
-                  // Need to pass modifier from potency
-                  // right now only potency_id is passed
                   db={db}
                   id={currentNPC?.potency_id as number}
                 />
