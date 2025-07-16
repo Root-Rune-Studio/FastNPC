@@ -20,8 +20,8 @@ export default function StandardArray({
   str,
   dex,
   con,
-  wis,
   int,
+  wis,
   cha,
   db,
   id,
@@ -48,8 +48,8 @@ export default function StandardArray({
       <Text>{str + modifier}  |  </Text> 
       <Text>{dex + modifier}  |  </Text>
       <Text>{con + modifier}  |  </Text> 
-      <Text>{wis + modifier}  |  </Text> 
       <Text>{int + modifier}  |  </Text> 
+      <Text>{wis + modifier}  |  </Text> 
       <Text>{cha + modifier}</Text>
     </ThemedText>
   )

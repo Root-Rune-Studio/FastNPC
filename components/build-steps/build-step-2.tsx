@@ -34,8 +34,8 @@ const renderSelectionButtons = (
       strength: number,
       dexterity: number,
       constitution: number,
-      wisdom: number,
       intelligence: number,
+      wisdom: number,
       charisma: number,
       description: string,
     }[],
@@ -77,8 +77,8 @@ const renderSelectionButtons = (
                   str={option.strength}
                   dex={option.dexterity}
                   con={option.constitution}
-                  wis={option.wisdom}
                   int={option.intelligence}
+                  wis={option.wisdom}
                   cha={option.charisma}
                   db={db}
                   id={currentNPC?.potency_id as number}
