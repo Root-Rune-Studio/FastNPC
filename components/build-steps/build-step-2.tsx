@@ -66,6 +66,7 @@ const renderSelectionButtons = (
           ]}>
               {option.primary_ability}
           </ThemedText>
+          {/* description container conditionally rendered only when selected */}
           {selectedId === option.id
             ? (
               <ThemedView style={styles.descriptionContainer}>
@@ -81,7 +82,7 @@ const renderSelectionButtons = (
                   wis={option.wisdom}
                   cha={option.charisma}
                   db={db}
-                  id={currentNPC?.potency_id as number}
+                  potencyId={currentNPC?.potency_id as number}
                 />
                 <ThemedText style={[
                   styles.abilityText,

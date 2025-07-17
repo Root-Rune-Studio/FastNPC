@@ -1,8 +1,10 @@
+/*reusable compnent for displaying potency adjusted ability scores*/
 import * as React from "react";
 import { ThemedText } from "../ThemedText";
 import { StyleProp, Text, TextStyle } from "react-native";
 import { getPotencyModifier } from "@/services/build-step-2";
 
+// data from different tables typed separately for flexibility and clarity
 type AbilityScores = {
   str: number;
   dex: number;
@@ -13,7 +15,7 @@ type AbilityScores = {
 }
 type AbilityModifier = {
   db: any;
-  id: number;
+  potencyId: number;
 };
 
 export default function StandardArray({
@@ -24,13 +26,13 @@ export default function StandardArray({
   wis,
   cha,
   db,
-  id,
+  potencyId,
   style
 }: AbilityScores & AbilityModifier & { style?: StyleProp<TextStyle> }) {
   const [modifier, setModifier] = React.useState<number>(0);
   
     React.useEffect(() => {
-      getPotencyModifier(db, id).then((potency) => {
+      getPotencyModifier(db, potencyId).then((potency) => {
         setModifier(potency.modifier as number);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps

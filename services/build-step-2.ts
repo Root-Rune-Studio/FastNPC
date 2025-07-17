@@ -16,6 +16,7 @@ export const getPotencyModifier = async (db: any, id: number): Promise<{ modifie
     return result;
   } catch (error) {
     console.error('Error fetching potency modifier:', error);
+    // error returns default value of 0
     return { modifier: 0 };
   }
 }

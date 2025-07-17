@@ -1,6 +1,6 @@
 import { useCurrentNPC } from "@/app/context/current-npc";
 import { useNPCBuilder } from "@/hooks/useNPCBuilder";
-import getSpecies from "@/services/build-step-3";
+import { getSpecies } from "@/services/build-step-3";
 import { useSQLiteContext } from 'expo-sqlite';
 import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import LoadingScreen from "../LoadingScreen";
@@ -59,7 +59,7 @@ const renderSelectionButtons = (
 
   return (
     <ScrollView style={styles.container}>      
-      {/* Archetype Section */}
+      {/* Species Section */}
       <ThemedView style={styles.sectionContainer}>
         <ThemedText style={styles.sectionText} type="subtitle">Species</ThemedText>
         {renderSelectionButtons(dataArrays[0] || [], selections[0], createSelectionHandler(0), false)}
