@@ -1,4 +1,4 @@
-import { useCurrentNPC } from "@/app/context/current-npc";
+import { useCurrentNPC } from "@/context/current-npc";
 import { useNPCBuilder } from "@/hooks/useNPCBuilder";
 import { getArchetypes } from "@/services/build-step-2";
 import { useSQLiteContext } from 'expo-sqlite';

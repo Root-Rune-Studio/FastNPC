@@ -1,4 +1,4 @@
-import { useCurrentNPC } from "@/app/context/current-npc";
+import { useCurrentNPC } from "@/context/current-npc";
 import { useNPCBuilder } from "@/hooks/useNPCBuilder";
 import { getAges, getGenders, getPotencies } from "@/services/build-step-1";
 import { useSQLiteContext } from 'expo-sqlite';
@@ -130,4 +130,3 @@ const styles = StyleSheet.create({
     color: 'white',
   },
 });
-

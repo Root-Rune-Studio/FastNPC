@@ -7,7 +7,7 @@ import 'react-native-reanimated';
 
 import dbInit from '@/components/db-utils/InitDatabase';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { CurrentNPCProvider } from './context/current-npc';
+import { CurrentNPCProvider } from '../context/current-npc';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
