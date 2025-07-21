@@ -82,7 +82,7 @@ const renderSelectionButtons = (
                   wis={option.wisdom}
                   cha={option.charisma}
                   db={db}
-                  potencyId={currentNPC?.potency_id as number}
+                  potencyId={currentNPC?.potency_id as number ?? 3}
                 />
                 <ThemedText style={[
                   styles.abilityText,
