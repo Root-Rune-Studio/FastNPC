@@ -26,7 +26,7 @@ const seedInitialData = async (db: any) => {
     ) VALUES (
       'Commoner',
       'Common',
-      10, 10, 12, 10, 10, 10,
+      10, 10, 10, 10, 10, 10,
       'CON'
     )`
   );
