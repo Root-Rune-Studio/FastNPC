@@ -21,7 +21,7 @@ export default function CreateAccount() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Create Campaign</ThemedText>
       </ThemedView>
-      <ThemedText>What's your campaign called?</ThemedText>
+      <ThemedText>What&#39;s your campaign called?</ThemedText>
       <ThemedView style={styles.titleContainer}>
         <CampaignForm />
       </ThemedView>

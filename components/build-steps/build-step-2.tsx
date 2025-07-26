@@ -1,39 +1,44 @@
 import { useCurrentNPC } from "@/context/current-npc";
 import { useNPCBuilder } from "@/hooks/useNPCBuilder";
-import { getAges, getGenders, getPotencies } from "@/services/build-step-1";
+import { getArchetypes } from "@/services/build-step-2";
 import { useSQLiteContext } from 'expo-sqlite';
 import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
-
 import LoadingScreen from "../LoadingScreen";
 import { ThemedText } from "../ThemedText";
 import { ThemedView } from "../ThemedView";
+import StandardArray from "../build-ui/StandardArray";
 
-export default function BuildStep1() {
+export default function BuildStep2() {
   const db = useSQLiteContext();
   const { currentNPC, updateCurrentNPC } = useCurrentNPC();
 
   const { dataArrays, selections, createSelectionHandler, isLoading } = useNPCBuilder({
     // declaration order matters due to index use
     fetchFunctions: [
-    () => getGenders(db),      // INDEX 0 = Gender
-    () => getAges(db),         // INDEX 1 = Age  
-    () => getPotencies(db)     // INDEX 2 = Potency 
+    () => getArchetypes(db),      // INDEX 0 = Archetype
     ],
     initialSelections: [
-      currentNPC?.gender_id,
-      currentNPC?.age_id,
-      currentNPC?.potency_id
+      currentNPC?.archetype_id,
     ],
     updateDBHandlers: [
-      (id) => updateCurrentNPC({ gender_id: id }),
-      (id) => updateCurrentNPC({ age_id: id }),
-      (id) => updateCurrentNPC({ potency_id: id })
+      (id) => updateCurrentNPC({ archetype_id: id }),
     ],
-    defaultValues: [2, 2, 3] // Gender=2, Age=2, Potency=3
+    defaultValues: [0] // Archetype=0
   });
 
 const renderSelectionButtons = (
-    options: { id: number; name: string }[],
+    options: {
+      id: number;
+      name: string,
+      primary_ability: string,
+      strength: number,
+      dexterity: number,
+      constitution: number,
+      intelligence: number,
+      wisdom: number,
+      charisma: number,
+      description: string,
+    }[],
     selectedId: number,
     onSelect: (id: number) => Promise<void>,
     horizontal: boolean = true
@@ -53,8 +58,42 @@ const renderSelectionButtons = (
             styles.buttonText,
             selectedId === option.id && styles.selectedButtonText
           ]}>
-            {option.name}
+              {option.name}
           </ThemedText>
+          <ThemedText style={[
+            styles.abilityText,
+            selectedId === option.id && styles.selectedButtonText
+          ]}>
+              {option.primary_ability}
+          </ThemedText>
+          {/* description container conditionally rendered only when selected */}
+          {selectedId === option.id
+            ? (
+              <ThemedView style={styles.descriptionContainer}>
+                <StandardArray
+                  style={[
+                    styles.abilityText,
+                    selectedId === option.id && styles.selectedButtonText
+                  ]}
+                  str={option.strength}
+                  dex={option.dexterity}
+                  con={option.constitution}
+                  int={option.intelligence}
+                  wis={option.wisdom}
+                  cha={option.charisma}
+                  db={db}
+                  potencyId={currentNPC?.potency_id as number ?? 3}
+                />
+                <ThemedText style={[
+                  styles.abilityText,
+                  selectedId === option.id && styles.selectedButtonText,
+                  { textAlign: 'center' }
+                ]}>
+                  {option.description}
+                </ThemedText>
+              </ThemedView>
+            ) : null
+          }
         </TouchableOpacity>
       ))}
     </ThemedView>
@@ -66,22 +105,9 @@ const renderSelectionButtons = (
 
   return (
     <ScrollView style={styles.container}>      
-      {/* Gender Section */}
       <ThemedView style={styles.sectionContainer}>
-        <ThemedText style={styles.sectionText} type="subtitle">Gender</ThemedText>
-        {renderSelectionButtons(dataArrays[0] || [], selections[0], createSelectionHandler(0))}
-      </ThemedView>
-
-      {/* Age Section */}
-      <ThemedView style={styles.sectionContainer}>
-        <ThemedText style={styles.sectionText} type="subtitle">Age</ThemedText>
-        {renderSelectionButtons(dataArrays[1] || [], selections[1], createSelectionHandler(1))}
-      </ThemedView>
-
-      {/* Potency Section */}
-      <ThemedView style={styles.sectionContainer}>
-        <ThemedText style={styles.sectionText} type="subtitle">Potency</ThemedText>
-        {renderSelectionButtons(dataArrays[2] || [], selections[2], createSelectionHandler(2), false)}
+        <ThemedText style={styles.sectionText} type="subtitle">Archetype</ThemedText>
+        {renderSelectionButtons(dataArrays[0] || [], selections[0], createSelectionHandler(0), false)}
       </ThemedView>
     </ScrollView>
   );
@@ -106,6 +132,11 @@ const styles = StyleSheet.create({
   verticalContainer: {
     marginTop: 10,
   },
+  descriptionContainer : {
+    marginTop: 16,
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+  },
   selectionButton: {
     backgroundColor: '#D3D3D3',
     paddingVertical: 12,
@@ -125,6 +156,10 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: '500',
+  },
+  abilityText: {
+    fontSize: 14,
+    fontWeight: 400,
   },
   selectedButtonText: {
     color: 'white',
