@@ -1,6 +1,6 @@
 import { useCurrentNPC } from "@/context/current-npc";
 import { useNPCBuilder } from "@/hooks/useNPCBuilder";
-import { getSpecies } from "@/services/build-step-3";
+import getSpecies from "@/services/build-step-3";
 import { useSQLiteContext } from 'expo-sqlite';
 import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import LoadingScreen from "../LoadingScreen";

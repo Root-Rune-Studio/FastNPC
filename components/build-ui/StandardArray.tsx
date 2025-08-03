@@ -31,12 +31,12 @@ export default function StandardArray({
 }: AbilityScores & AbilityModifier & { style?: StyleProp<TextStyle> }) {
   const [modifier, setModifier] = React.useState<number>(0);
   
-    React.useEffect(() => {
-      getPotencyModifier(db, potencyId).then((potency) => {
-        setModifier(potency.modifier as number);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+  React.useEffect(() => {
+    getPotencyModifier(db, potencyId).then((potency) => {
+      setModifier(potency.modifier as number);
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <ThemedText style={[
       style,
