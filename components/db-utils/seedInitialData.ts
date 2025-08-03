@@ -82,6 +82,136 @@ const seedInitialData = async (db: any) => {
       'INT'
     )`
   );
+  await db.runAsync(
+    `INSERT INTO archetypes (
+      name,
+      description,
+      strength, dexterity, constitution, intelligence, wisdom, charisma,
+      primary_ability
+    ) VALUES (
+      'Street Urchin',
+      'Scrappy Survivor',
+      8, 14, 10, 10, 8, 12,
+      'DEX'
+    )`
+  );
+  await db.runAsync(
+    `INSERT INTO archetypes (
+      name,
+      description,
+      strength, dexterity, constitution, intelligence, wisdom, charisma,
+      primary_ability
+    ) VALUES (
+      'Gambler',
+      'Risk-Taker',
+      8, 12, 10, 12, 8, 14,
+      'CHA'
+    )`
+  );
+  await db.runAsync(
+    `INSERT INTO archetypes (
+      name,
+      description,
+      strength, dexterity, constitution, intelligence, wisdom, charisma,
+      primary_ability
+    ) VALUES (
+      'Exile',
+      'Outcast',
+      10, 10, 12, 10, 14, 8,
+      'WIS'
+    )`
+  );
+  await db.runAsync(
+    `INSERT INTO archetypes (
+      name,
+      description,
+      strength, dexterity, constitution, intelligence, wisdom, charisma,
+      primary_ability
+    ) VALUES (
+      'Scribe',
+      'Knowledge Seeker',
+      8, 10, 10, 16, 12, 10,
+      'INT'
+    )`
+  );
+  await db.runAsync(
+    `INSERT INTO archetypes (
+      name,
+      description,
+      strength, dexterity, constitution, intelligence, wisdom, charisma,
+      primary_ability
+    ) VALUES (
+      'Hunter',
+      'Beast Slayer',
+      12, 14, 12, 10, 10, 8,
+      'DEX'
+    )`
+  );
+  await db.runAsync(
+    `INSERT INTO archetypes (
+      name,
+      description,
+      strength, dexterity, constitution, intelligence, wisdom, charisma,
+      primary_ability
+    ) VALUES (
+      'Peasant',
+      'Hard Worker',
+      14, 10, 12, 8, 10, 8,
+      'STR'
+    )`
+  );
+  await db.runAsync(
+    `INSERT INTO archetypes (
+      name,
+      description,
+      strength, dexterity, constitution, intelligence, wisdom, charisma,
+      primary_ability
+    ) VALUES (
+      'Witch',
+      'Arcane Practitioner',
+      8, 8, 10, 12, 12, 14,
+      'CHA'
+    )`
+  );
+  await db.runAsync(
+    `INSERT INTO archetypes (
+      name,
+      description,
+      strength, dexterity, constitution, intelligence, wisdom, charisma,
+      primary_ability
+    ) VALUES (
+      'Scoundrel',
+      'Devious Trickster',
+      10, 14, 10, 12, 8, 12,
+      'DEX'
+    )`
+  );
+  await db.runAsync(
+    `INSERT INTO archetypes (
+      name,
+      description,
+      strength, dexterity, constitution, intelligence, wisdom, charisma,
+      primary_ability
+    ) VALUES (
+      'Mercenary',
+      'Hired Blade',
+      14, 12, 12, 10, 8, 10,
+      'STR'
+    )`
+  );
+  await db.runAsync(
+    `INSERT INTO archetypes (
+      name,
+      description,
+      strength, dexterity, constitution, intelligence, wisdom, charisma,
+      primary_ability
+    ) VALUES (
+      'Alchemist',
+      'Potion Crafter',
+      8, 10, 12, 14, 10, 12,
+      'INT'
+    )`
+  );
 
   // seed species
   await db.runAsync(`INSERT INTO species (name) VALUES ('Human')`);
@@ -90,6 +220,39 @@ const seedInitialData = async (db: any) => {
   await db.runAsync(`INSERT INTO species (name) VALUES ('Kenku')`);
   await db.runAsync(`INSERT INTO species (name) VALUES ('Halfling')`);
   await db.runAsync(`INSERT INTO species (name) VALUES ('Harengon')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Human')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Elf')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Dwarf')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Kenku')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Halfling')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Harengon')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Dragonborn')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Tiefling')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Gnome')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Half-Elf')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Half-Orc')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Tabaxi')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Goliath')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Aarakocra')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Firbolg')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Lizardfolk')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Triton')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Yuan-Ti Pureblood')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Genasi')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Kobold')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Orc')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Changeling')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Simic Hybrid')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Vedalken')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Warforged')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Hobgoblin')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Goblin')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Kalashtar')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Shifter')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Changelings')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Bugbear')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Minotaur')`);
+  await db.runAsync(`INSERT INTO species (name) VALUES ('Tortle')`);
 }
 
 export default seedInitialData
