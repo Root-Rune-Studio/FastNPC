@@ -7,7 +7,7 @@ import { ThemedText } from "../ThemedText";
 import { ThemedView } from "../ThemedView";
 import { NPC } from "@/types/db-schema";
 
-type DisplayNPC = Partial<NPC>
+type DisplayNPC = Partial<NPC>;
 
 export default function DisplayStep() {
   const db = useSQLiteContext();
@@ -15,10 +15,6 @@ export default function DisplayStep() {
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [npc, setNpc] = React.useState<DisplayNPC>();
 
-
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
 
   return (
     isLoading
