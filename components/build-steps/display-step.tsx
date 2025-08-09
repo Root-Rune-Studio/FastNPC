@@ -5,7 +5,7 @@ import { ScrollView, StyleSheet } from "react-native";
 import LoadingScreen from "../LoadingScreen";
 import { ThemedText } from "../ThemedText";
 import { ThemedView } from "../ThemedView";
-import { getRandomBond, getRandomFlaw } from "@/services/display-step";
+import { getArchetypeBonds, getArchetypeFlaws } from "@/services/display-step";
 import { useNPCBuilder } from "@/hooks/useNPCBuilder";
 
 export default function DisplayStep() {
@@ -15,8 +15,8 @@ export default function DisplayStep() {
   const { dataArrays, selections, createSelectionHandler, isLoading } = useNPCBuilder({
     // declaration order matters due to index use
     fetchFunctions: [
-      () => getRandomBond(db, currentNPC?.archetype_id as number),      // INDEX 0 = Bond
-      () => getRandomFlaw(db, currentNPC?.archetype_id as number),         // INDEX 2 = Flaw  
+      () => getArchetypeBonds(db, currentNPC?.archetype_id as number),      // INDEX 0 = Bond
+      () => getArchetypeFlaws(db, currentNPC?.archetype_id as number),         // INDEX 2 = Flaw  
     ],
     initialSelections: [
       currentNPC?.bond_id,

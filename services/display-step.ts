@@ -70,36 +70,34 @@ type BondFlaw = {
   description: string;
 }
 
-const getRandomBond = async (
+const getArchetypeBonds = async (
   db: any,
   archetypeId: number
 ): Promise<{
   data: BondFlaw[] | null, error?: string
 }> => {
   try {
-    const resultId = diceRoll(6, 1);
-    const result: BondFlaw[] = await db.getAllAsync(
+    const result = await db.getAllAsync(
       `SELECT id, description FROM bonds WHERE archetype_id = ${archetypeId}`
     );
-    return { data: [result[resultId - 1]] as BondFlaw[] };
+    return { data: result as BondFlaw[] };
   } catch (error) {
     console.error('Error fetching bonds:', error);
     return {  data: null, error: 'Failed to fetch bonds' };
   }
 }
 
-const getRandomFlaw = async (
+const getArchetypeFlaws = async (
   db: any,
   archetypeId: number
 ): Promise<{
   data: BondFlaw[] | null, error?: string
 }> => {
   try {
-    const resultId = diceRoll(6, 1);
-    const result: BondFlaw[] = await db.getAllAsync(
+    const result = await db.getAllAsync(
       `SELECT id, description FROM flaws WHERE archetype_id = ${archetypeId}`
     );
-    return { data: [result[resultId - 1]] as BondFlaw[] };
+    return { data: result as BondFlaw[] };
   } catch (error) {
     console.error('Error fetching flaws:', error);
     return {  data: null, error: 'Failed to fetch flaws' };
@@ -110,6 +108,6 @@ export {
   getAgeValue,
   diceRoll,
   hitPointCalculator,
-  getRandomBond,
-  getRandomFlaw,
+  getArchetypeBonds,
+  getArchetypeFlaws,
 }
