@@ -14,7 +14,7 @@ export default function BuildStep3() {
   const { dataArrays, selections, createSelectionHandler, isLoading } = useNPCBuilder({
     // declaration order matters due to index use
     fetchFunctions: [
-    () => getSpecies(db),      // INDEX 0 = Species
+      () => getSpecies(db),      // INDEX 0 = Species
     ],
     initialSelections: [
       currentNPC?.species_id,

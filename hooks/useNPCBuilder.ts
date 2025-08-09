@@ -44,6 +44,7 @@ export const useNPCBuilder = <T extends { id: number }>(
     };
 
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [db]);
 
   // Creates a selection handler for a specific section index -- a fn that returns another fn

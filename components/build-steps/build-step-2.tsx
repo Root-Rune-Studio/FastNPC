@@ -15,7 +15,7 @@ export default function BuildStep2() {
   const { dataArrays, selections, createSelectionHandler, isLoading } = useNPCBuilder({
     // declaration order matters due to index use
     fetchFunctions: [
-    () => getArchetypes(db),      // INDEX 0 = Archetype
+      () => getArchetypes(db),      // INDEX 0 = Archetype
     ],
     initialSelections: [
       currentNPC?.archetype_id,

@@ -56,10 +56,12 @@ export interface NPC {
 
 export interface Bond {
   id: number;
+  archetype_id: number;
   description: string;
 }
 
 export interface Flaw {
   id: number;
+  archetype_id: number;
   description: string;
 }

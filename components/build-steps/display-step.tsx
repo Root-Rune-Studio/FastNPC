@@ -5,15 +5,29 @@ import { ScrollView, StyleSheet } from "react-native";
 import LoadingScreen from "../LoadingScreen";
 import { ThemedText } from "../ThemedText";
 import { ThemedView } from "../ThemedView";
-import { NPC } from "@/types/db-schema";
-
-type DisplayNPC = Partial<NPC>;
+import { getRandomBond, getRandomFlaw } from "@/services/display-step";
+import { useNPCBuilder } from "@/hooks/useNPCBuilder";
 
 export default function DisplayStep() {
   const db = useSQLiteContext();
   const { currentNPC, updateCurrentNPC } = useCurrentNPC();
-  const [isLoading, setIsLoading] = React.useState<boolean>(true);
-  const [npc, setNpc] = React.useState<DisplayNPC>();
+
+  const { dataArrays, selections, createSelectionHandler, isLoading } = useNPCBuilder({
+    // declaration order matters due to index use
+    fetchFunctions: [
+      () => getRandomBond(db, currentNPC?.archetype_id as number),      // INDEX 0 = Bond
+      () => getRandomFlaw(db, currentNPC?.archetype_id as number),         // INDEX 2 = Flaw  
+    ],
+    initialSelections: [
+      currentNPC?.bond_id,
+      currentNPC?.flaw_id,
+    ],
+    updateDBHandlers: [
+      (id) => updateCurrentNPC({ bond_id: id }),
+      (id) => updateCurrentNPC({ flaw_id: id }),
+    ],
+    defaultValues: [1, 1] // Bond=1, Flaw=1
+  });
 
 
   return (

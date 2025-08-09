@@ -19,20 +19,6 @@ const dbInit = async (db: any) => {
   `);
 
   await db.execAsync(`
-    CREATE TABLE IF NOT EXISTS bonds (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      description TEXT NOT NULL
-    );
-  `);
-
-  await db.execAsync(`
-    CREATE TABLE IF NOT EXISTS flaws (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      description TEXT NOT NULL
-    );
-  `);
-
-  await db.execAsync(`
     CREATE TABLE IF NOT EXISTS genders (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT
@@ -59,6 +45,22 @@ const dbInit = async (db: any) => {
       wisdom INTEGER,
       charisma INTEGER,
       primary_ability TEXT
+    );
+  `);
+
+  await db.execAsync(`
+    CREATE TABLE IF NOT EXISTS bonds (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      FOREIGN KEY (archetype_id) REFERENCES archetypes(id)
+      description TEXT NOT NULL
+    );
+  `);
+
+  await db.execAsync(`
+    CREATE TABLE IF NOT EXISTS flaws (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      FOREIGN KEY (archetype_id) REFERENCES archetypes(id)
+      description TEXT NOT NULL
     );
   `);
 
@@ -119,6 +121,27 @@ const dbInit = async (db: any) => {
       INSERT INTO db_metadata (key, value) VALUES ('initial_seed_complete', 'true')
     `);
   }
+
+
+  // Function to drop and reseed tables with an array of table names
+  async function loadNewData(db:any, tableNames: string[]) {
+    try {
+      if (tableNames.length === 1 && tableNames[0] === 'all') {
+        await db.allAsync("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';");
+      } else {
+        for (let table of tableNames) {
+          await db.runAsync(`DROP TABLE IF EXISTS ${table}`);
+        }
+      }
+      await seedInitialData(db);
+      await db.runAsync(`INSERT INTO db_metadata (key, value) VALUES ('initial_seed_complete', 'true')`);
+    } catch (error) {
+      console.error('Error dropping and reseeding tables:', error);
+    }
+  }
+  // if you want a full re-seed, pass 'all' as the only item in the tablesNames array
+  await loadNewData(db, ['species', 'bonds', 'flaws']);
+  await loadNewData(db, ['all']);
 }
 
 export default dbInit;

@@ -15,9 +15,9 @@ export default function BuildStep1() {
   const { dataArrays, selections, createSelectionHandler, isLoading } = useNPCBuilder({
     // declaration order matters due to index use
     fetchFunctions: [
-    () => getGenders(db),      // INDEX 0 = Gender
-    () => getAges(db),         // INDEX 1 = Age  
-    () => getPotencies(db)     // INDEX 2 = Potency 
+      () => getGenders(db),      // INDEX 0 = Gender
+      () => getAges(db),         // INDEX 1 = Age  
+      () => getPotencies(db)     // INDEX 2 = Potency 
     ],
     initialSelections: [
       currentNPC?.gender_id,
